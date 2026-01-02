@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-6cvv+(4))23$%x_tg8f&i7dsi=6e-3*yg8wx#7c#$qto&ojfye'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "accounts",
     "portfolio",
     "dashboard",
+    "whitenoise.runserver_nostatic",
 ]
 
 SIMPLE_JWT = {
@@ -90,6 +91,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 REST_FRAMEWORK = {
@@ -129,8 +131,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Portfolio_Database',  # <--- REPLACE with the exact name you created in pgAdmin
+        'USER': 'postgres',      # <--- Usually 'postgres'
+        'PASSWORD': 'Express@123', # <--- The password you use to log in to pgAdmin
+        'HOST': 'localhost',     # <--- Means the database is on your computer
+        'PORT': '5432',          # <--- The default port for PostgreSQL
     }
 }
 

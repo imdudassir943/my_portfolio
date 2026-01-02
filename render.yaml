@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: portfolio-backend
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn backend.portfolio.wsgi:application
